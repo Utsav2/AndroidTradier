@@ -3,6 +3,9 @@ package com.steins.tradier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
@@ -18,11 +21,9 @@ import com.android.volley.Response;
  * 
  */
 
-public class MarketRequest extends Request<String> {
+class TradierRequest extends Request<String> {
 
 	// The Tradier API url for getting market data
-
-	private static String BASE_URL = "https://api.tradier.com/v1/markets";
 
 	private static String SYMBOLS = "symbols";
 
@@ -30,61 +31,61 @@ public class MarketRequest extends Request<String> {
 
 	private HashMap<String, String> mParams;
 
-	private String ACCEPT = "Accept";
-
-	private String JSON_MIMETYPE = "application/json";
-
-	// This is passed in by the user, and is called if the request is succesful
+	// This is passed in by the user, and is called if the request is successful
 	private final Response.Listener<String> mListener;
 
-	public MarketRequest(Response.Listener<String> listener,
-			Response.ErrorListener errorListener, String extraURL,
-			ArrayList<Stock> stocks, HashMap<String, String> headers,
+	public TradierRequest(Response.Listener<String> listener,
+			Response.ErrorListener errorListener, int method, String url,
+			ArrayList<String> stocks, HashMap<String, String> headers,
 			HashMap<String, String> extraParameters) {
 
-		super(Method.GET, BASE_URL, errorListener);
+		super(method, url, errorListener);
 
 		mListener = listener;
 
-		createHeaders(headers);
+		mHeaders = headers;
 
 		createParams(stocks, extraParameters);
 
 	}
 
 	/*
-	 * createHeaders simply creates the headers for the http request
-	 */
-	private void createHeaders(HashMap<String, String> headers) {
-
-		mHeaders = headers;
-
-		mHeaders.put(ACCEPT, JSON_MIMETYPE);
-
-	}
-
-	/*
 	 * This gets all the symbols from the array list of stocks and sets the
-	 * parameters to the complete string.
+	 * parameters to the complete string.It checks if the components are null as
+	 * well, so it can be used for any market request
 	 */
-	private void createParams(ArrayList<Stock> stocks,
+	private void createParams(ArrayList<String> stocks,
 			HashMap<String, String> parameters) {
 
-		StringBuffer builder = new StringBuffer();
+		mParams = new HashMap<String, String>();
 
-		for (Stock stock : stocks) {
+		if (stocks != null) {
 
-			builder.append(stock.getSymbol());
+			StringBuffer builder = new StringBuffer();
 
-			builder.append(',');
+			for (String stock : stocks) {
+
+				builder.append(stock);
+
+				builder.append(',');
+
+			}
+
+			builder.deleteCharAt(builder.length() - 1);
+
+			mParams.put(SYMBOLS, builder.toString());
+
+		}
+		if (parameters != null) {
+
+			for (Map.Entry<String, String> entry : parameters.entrySet()) {
+
+				mParams.put(entry.getKey(), entry.getValue());
+
+			}
 
 		}
 
-		builder.deleteCharAt(builder.length() - 1);
-
-		parameters.put(SYMBOLS, builder.toString());
-
-		mParams = parameters;
 	}
 
 	/*
@@ -93,6 +94,8 @@ public class MarketRequest extends Request<String> {
 
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError {
+		
+		Log.e("HASH", mHeaders.get("Authorization") + "");
 
 		return mHeaders;
 	}
