@@ -95,8 +95,6 @@ class TradierRequest extends Request<String> {
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError {
 		
-		Log.e("HASH", mHeaders.get("Authorization") + "");
-
 		return mHeaders;
 	}
 
