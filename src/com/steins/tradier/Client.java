@@ -23,7 +23,7 @@ class Client {
 
 	private Context mContext;
 
-	private RequestQueue mQueue;
+	private static RequestQueue mQueue;
 
 	// Initializes a client session with an access token, and allows user to
 	// change the mimetype to user's choice.

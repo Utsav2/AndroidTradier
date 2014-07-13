@@ -5,18 +5,22 @@ import com.android.volley.Request.Method;
 
 import android.content.Context;
 
-class AccountClient extends Client {
+public class AccountClient extends Client {
 
 	private static final String BASE_URL = "https://api.tradier.com/v1";
 
 	private static String requestUrl;
+	
+	public OrderClient order;
 
-	public AccountClient(String id, Context mContext, String token,
+	public AccountClient(String id, Context context, String token,
 			String contentType) {
 
-		super(mContext, token, contentType);
+		super(context, token, contentType);
 
 		requestUrl += BASE_URL + "/accounts/" + id;
+		
+		order = new OrderClient(id, context, token, contentType);
 
 	}
 
