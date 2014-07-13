@@ -31,6 +31,8 @@ class TradierRequest extends Request<String> {
 
 	private HashMap<String, String> mParams;
 
+	private String mContentType;
+
 	// This is passed in by the user, and is called if the request is successful
 	private final Response.Listener<String> mListener;
 
@@ -94,20 +96,27 @@ class TradierRequest extends Request<String> {
 
 	@Override
 	public Map<String, String> getHeaders() throws AuthFailureError {
-		
+
+		if (mHeaders == null)
+			return super.getHeaders();
+
 		return mHeaders;
 	}
 
 	@Override
-	protected Map<String, String> getParams() {
+	protected Map<String, String> getParams() throws AuthFailureError {
+
+		if (mParams == null)
+			return super.getParams();
 
 		return mParams;
 	}
 
 	@Override
 	protected Response<String> parseNetworkResponse(NetworkResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+
+		return Response.success(new String(response.data), getCacheEntry());
+
 	}
 
 	@Override

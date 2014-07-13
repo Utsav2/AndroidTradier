@@ -1,8 +1,12 @@
 package com.steins.tradier;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.Response;
+
 import android.content.Context;
 
-public class Data {
+public class Tradier {
 
 	public static String CONTENT_JSON = "application/json";
 
@@ -13,7 +17,7 @@ public class Data {
 	public UserClient user;
 
 	public MarketClient market;
-	
+
 	public WatchlistClient watchlists;
 
 	private Context mContext;
@@ -22,23 +26,21 @@ public class Data {
 
 	private String contentType;
 
-	public Data(Context mContext, String token, String contentType) {
+	public Tradier(Context mContext, String code, String contentType) {
 
 		this.mContext = mContext;
-
-		this.token = token;
 
 		this.contentType = contentType;
 
 		user = new UserClient(mContext, token, contentType);
 
 		market = new MarketClient(mContext, token, contentType);
-		
+
 		watchlists = new WatchlistClient(mContext, token, contentType);
 
 	}
 
-	public Data(Context mContext, String token) {
+	public Tradier(Context mContext, String token) {
 
 		this(mContext, token, CONTENT_XML);
 
@@ -49,4 +51,5 @@ public class Data {
 		return new AccountClient(id, mContext, token, contentType);
 
 	}
+
 }

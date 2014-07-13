@@ -3,6 +3,8 @@ package com.steins.tradier;
 import java.util.HashMap;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.Request.Method;
 import com.android.volley.toolbox.Volley;
 
 import android.content.Context;

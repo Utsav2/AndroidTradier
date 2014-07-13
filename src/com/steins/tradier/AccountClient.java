@@ -22,7 +22,7 @@ class AccountClient extends Client {
 
 	public AccountClient(String id, Context mContext, String token) {
 
-		this(id, mContext, token, Data.CONTENT_XML);
+		this(id, mContext, token, Tradier.CONTENT_XML);
 
 	}
 
