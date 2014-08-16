@@ -13,7 +13,7 @@ class MarketClient extends Client {
 	private static final String BASE_URL = "https://api.tradier.com/v1/markets";
 
 	// Initializes a client session with an access token. The content type
-	// default is JSON
+	// default is XML
 
 
 	// Initializes a client session with an access token, and allows developer
