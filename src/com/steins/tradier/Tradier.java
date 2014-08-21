@@ -31,6 +31,8 @@ public class Tradier {
 		this.mContext = mContext;
 
 		this.contentType = contentType;
+		
+		this.token = code;
 
 		user = new UserClient(mContext, token, contentType);
 
