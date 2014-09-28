@@ -18,7 +18,7 @@ public class AccountClient extends Client {
 
 		super(context, token, contentType);
 
-		requestUrl += BASE_URL + "/accounts/" + id;
+		requestUrl = BASE_URL + "/accounts/" + id;
 		
 		order = new OrderClient(id, context, token, contentType);
 
