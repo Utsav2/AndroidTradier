@@ -18,7 +18,7 @@ public class OrderClient extends Client {
 
 		super(context, token, contentType);
 
-		requestUrl += BASE_URL + "/accounts/" + id;
+		requestUrl = BASE_URL + "/accounts/" + id;
 	}
 
 	private void orderRequest(String requestType, int method,
