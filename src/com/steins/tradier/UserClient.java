@@ -5,7 +5,7 @@ import com.android.volley.Response;
 
 import android.content.Context;
 
-class UserClient extends Client {
+public class UserClient extends Client {
 
 	private static final String BASE_URL = "https://api.tradier.com/v1/user";
 
