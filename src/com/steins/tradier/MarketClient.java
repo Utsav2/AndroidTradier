@@ -8,7 +8,7 @@ import android.content.Context;
 import com.android.volley.Response;
 import com.android.volley.Request.Method;
 
-class MarketClient extends Client {
+public class MarketClient extends Client {
 
 	private static final String BASE_URL = "https://api.tradier.com/v1/markets";
 
